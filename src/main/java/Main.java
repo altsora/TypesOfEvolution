@@ -2,7 +2,9 @@ import java.math.BigInteger;
 
 public class Main {
     // Осторожно: с добавлением каждой буквы ступенчатый отбор работает НАМНОГО дольше!
-    private static String text = "hello"
+    private static final String TEXT_CUMULATIVE_SELECTION = "hello my dear github"
+            .toLowerCase();
+    private static final String TEXT_STEP_SELECTION = "hello"
             .toLowerCase();
 
     private static final char[] ALPHABET = {
@@ -13,8 +15,8 @@ public class Main {
     };
 
     public static void main(String[] args) {
-        new CumulativeSelection("Накапливающий отбор", text, ALPHABET).start();
-        new StepSelection("Ступенчатый отбор", text, ALPHABET).start();
+        new CumulativeSelection("Накапливающий отбор", TEXT_CUMULATIVE_SELECTION, ALPHABET).start();
+        new StepSelection("Ступенчатый отбор", TEXT_STEP_SELECTION, ALPHABET).start();
     }
 
     public synchronized static void showResult(long resultTime, String text, StringBuilder sb, BigInteger count, String name) {
