@@ -1,15 +1,18 @@
 import java.math.BigInteger;
+import java.util.Random;
 
 public class CumulativeSelection extends Thread {
     private String text;
     private char[] alphabet;
     private BigInteger count;
+    private Random random;
 
     public CumulativeSelection(String name, String text, char[] alphabet) {
         this.setName(name);
         this.text = text;
         this.alphabet = alphabet;
         this.count = BigInteger.valueOf(0);
+        this.random = new Random();
     }
 
     @Override
@@ -29,7 +32,7 @@ public class CumulativeSelection extends Thread {
 
     private void createLine(StringBuilder sb) {
         for (int i = 0; i < text.length(); i++) {
-            int index = (int) (Math.random() * alphabet.length);
+            int index = random.nextInt(alphabet.length);
             sb.append(alphabet[index]);
         }
     }
@@ -45,9 +48,9 @@ public class CumulativeSelection extends Thread {
     private void changeLine(StringBuilder sb) {
         for (int i = 0; i < text.length(); i++) {
             if (sb.charAt(i) == '*') {
-                int index = (int) (Math.random() * alphabet.length);
+                int index = random.nextInt(alphabet.length);
                 sb.replace(i, i + 1, String.valueOf(alphabet[index]));
-                //break;
+                break;  // Если не заккоментировано, то применяется только одно изменение (выполняется чуть дольше и приближено к реальным дискретным изменениям)
             }
         }
     }

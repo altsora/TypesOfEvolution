@@ -1,15 +1,18 @@
 import java.math.BigInteger;
+import java.util.Random;
 
-public class StepSelection extends Thread {
+public class OneStageSelection extends Thread {
     private String text;
     private char[] alphabet;
     private BigInteger count;
+    private Random random;
 
-    public StepSelection(String name, String text, char[] alphabet) {
+    public OneStageSelection(String name, String text, char[] alphabet) {
         this.setName(name);
         this.text = text;
         this.alphabet = alphabet;
         this.count = BigInteger.valueOf(0);
+        this.random = new Random();
     }
 
     @Override
@@ -28,7 +31,7 @@ public class StepSelection extends Thread {
 
     private void createLine(StringBuilder sb) {
         for (int i = 0; i < text.length(); i++) {
-            int index = (int) (Math.random() * alphabet.length);
+            int index = random.nextInt(alphabet.length);
             sb.append(alphabet[index]);
         }
     }
